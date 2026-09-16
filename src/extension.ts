@@ -204,12 +204,12 @@ function updateInlineDecorations(editor: vscode.TextEditor, maxLen: number): voi
   const errorOpts: vscode.DecorationOptions[] = [];   // inline error text
 
   for (const span of spans) {
-    // Reveal raw text (no render) when the caret is on the span's line, so you
-    // can edit the LaTeX. Render-and-replace it otherwise.
+    // Reveal raw text (no render) when the caret is on any line of the span
+    // (multi-line $$ blocks included), so you can edit the LaTeX.
     const caretOnLine = editor.selections.some(
       (sel) =>
-        sel.active.line === span.range.start.line &&
-        sel.active.line === span.range.end.line
+        sel.active.line >= span.range.start.line &&
+        sel.active.line <= span.range.end.line
     );
     if (caretOnLine) {
       continue;

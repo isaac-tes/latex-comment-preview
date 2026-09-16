@@ -2,7 +2,7 @@
   "name": "latex-comment-preview",
   "displayName": "LaTeX Comment Preview",
   "description": "Render LaTeX math inline in your code comments and docstrings. Equations in $...$ display as real math, right where you write them.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "publisher": "evan-robles",
   "license": "MIT",
   "icon": "icon.png",
@@ -97,6 +97,7 @@
     "vscode:prepublish": "npm run build",
     "build": "node esbuild.js --production",
     "watch": "node esbuild.js --watch",
+    "test": "esbuild test/scanner.test.ts --bundle --platform=node --outfile=/tmp/scanner.test.js && node /tmp/scanner.test.js",
     "compile-tests": "tsc -p ./",
     "package": "vsce package"
   },
@@ -109,5 +110,8 @@
     "@types/vscode": "^1.85.0",
     "esbuild": "^0.21.0",
     "typescript": "^5.4.0"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
   }
 }
